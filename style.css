@@ -1,40 +1,13 @@
 body {
   margin: 0;
-  background-color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
-  color: white;
-}
-
-.tarjeta {
-  text-align: center;
-  padding: 20px;
+  background: #000;
+  overflow: hidden;
 }
 
 canvas {
-  filter: drop-shadow(0 0 10px red) drop-shadow(0 0 20px red);
+  display: block;
+  width: 100vw;
+  height: 100vh;
 }
 
-.info {
-  margin-top: 20px;
-}
-
-.whatsapp {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #25D366;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: bold;
-  transition: background 0.3s;
-}
-
-.whatsapp:hover {
-  background-color: #1ebe5d;
-}
 
