@@ -11,14 +11,26 @@ body {
 
 .tarjeta {
   text-align: center;
-  position: relative;
+  padding: 20px;
 }
 
-canvas {
+.corazon {
   width: 200px;
   height: 200px;
+  filter: drop-shadow(0 0 10px red);
 }
 
 .info {
   margin-top: 20px;
+}
+
+.whatsapp {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #25D366;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
 }
