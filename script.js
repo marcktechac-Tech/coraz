@@ -9,7 +9,7 @@ const centerY = canvas.height / 2;
 const particles = [];
 const heartPoints = [];
 
-// Fórmula paramétrica del corazón (solo contorno)
+// Fórmula paramétrica del corazón (contorno)
 function heartFunction(t) {
   const x = 16 * Math.pow(Math.sin(t), 3);
   const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
@@ -34,16 +34,23 @@ for (let i = 0; i < 2000; i++) {
   const target = heartPoints[Math.floor(Math.random() * heartPoints.length)];
 
   particles.push({
-    x, y,
+    startX: x,
+    startY: y,
     targetX: centerX + target.x,
     targetY: centerY + target.y,
-    speed: 0.01 + Math.random() * 0.02,
-    offset: Math.random() * Math.PI * 2 // para vibración
+    x, y
   });
 }
 
+let startTime = null;
 let pulse = 0;
-function animate() {
+const duration = 5000; // 5 segundos
+
+function animate(timestamp) {
+  if (!startTime) startTime = timestamp;
+  const elapsed = timestamp - startTime;
+  const progress = Math.min(elapsed / duration, 1); // 0 → 1 en 5s
+
   ctx.fillStyle = "rgba(0,0,0,0.25)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -51,13 +58,13 @@ function animate() {
   const glow = 8 + Math.sin(pulse) * 6; // efecto de latido
 
   particles.forEach(p => {
-    // mover cada partícula hacia su punto objetivo
-    p.x += (p.targetX - p.x) * p.speed;
-    p.y += (p.targetY - p.y) * p.speed;
+    // interpolación lineal: desde el borde hasta el contorno en 5s
+    p.x = p.startX + (p.targetX - p.startX) * progress;
+    p.y = p.startY + (p.targetY - p.startY) * progress;
 
     // vibración ligera en el borde (palpitar)
-    const vibrateX = Math.sin(pulse + p.offset) * 2;
-    const vibrateY = Math.cos(pulse + p.offset) * 2;
+    const vibrateX = Math.sin(pulse + p.targetX) * 1.5;
+    const vibrateY = Math.cos(pulse + p.targetY) * 1.5;
 
     ctx.beginPath();
     ctx.moveTo(p.x, p.y);
@@ -72,7 +79,8 @@ function animate() {
   requestAnimationFrame(animate);
 }
 
-animate();
+requestAnimationFrame(animate);
+
 
 
 
