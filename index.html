@@ -8,13 +8,20 @@
 </head>
 <body>
   <div class="tarjeta">
-    <canvas id="corazonCanvas"></canvas>
+    <svg viewBox="0 0 100 100" class="corazon">
+      <path d="M10,30 C20,-10 80,-10 90,30 C90,60 50,90 50,90 C50,90 10,60 10,30 Z"
+            stroke="red" stroke-width="2" fill="none"
+            stroke-dasharray="300" stroke-dashoffset="300">
+        <animate attributeName="stroke-dashoffset" from="300" to="0" dur="2s" fill="freeze" />
+      </path>
+    </svg>
     <div class="info">
       <h1>Luis</h1>
       <p>Diseño gráfico, soporte técnico y suscripciones digitales</p>
     </div>
+    <a class="whatsapp" href="https://wa.me/?text=¡Mira mi tarjeta digital! ❤️👉 https://tutarjeta.com" target="_blank">
+      Compartir por WhatsApp
+    </a>
   </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
