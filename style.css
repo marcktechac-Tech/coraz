@@ -14,10 +14,8 @@ body {
   padding: 20px;
 }
 
-.corazon {
-  width: 200px;
-  height: 200px;
-  filter: drop-shadow(0 0 10px red);
+canvas {
+  filter: drop-shadow(0 0 10px red) drop-shadow(0 0 20px red);
 }
 
 .info {
@@ -33,4 +31,10 @@ body {
   text-decoration: none;
   border-radius: 5px;
   font-weight: bold;
+  transition: background 0.3s;
 }
+
+.whatsapp:hover {
+  background-color: #1ebe5d;
+}
+
