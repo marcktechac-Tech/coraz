@@ -38,7 +38,8 @@ for (let i = 0; i < 2000; i++) {
     startY: y,
     targetX: centerX + target.x,
     targetY: centerY + target.y,
-    x, y
+    x, y,
+    offset: Math.random() * Math.PI * 2
   });
 }
 
@@ -63,8 +64,8 @@ function animate(timestamp) {
     p.y = p.startY + (p.targetY - p.startY) * progress;
 
     // vibración ligera en el borde (palpitar)
-    const vibrateX = Math.sin(pulse + p.targetX) * 1.5;
-    const vibrateY = Math.cos(pulse + p.targetY) * 1.5;
+    const vibrateX = Math.sin(pulse + p.offset) * 1.5 * progress;
+    const vibrateY = Math.cos(pulse + p.offset) * 1.5 * progress;
 
     ctx.beginPath();
     ctx.moveTo(p.x, p.y);
@@ -80,7 +81,6 @@ function animate(timestamp) {
 }
 
 requestAnimationFrame(animate);
-
 
 
 
