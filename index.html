@@ -1,27 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tarjeta de Luis</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Corazón Animado</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    canvas {
+      filter: drop-shadow(0 0 10px red) drop-shadow(0 0 20px red);
+    }
+  </style>
 </head>
 <body>
-  <div class="tarjeta">
-    <svg viewBox="0 0 100 100" class="corazon">
-      <path d="M10,30 C20,-10 80,-10 90,30 C90,60 50,90 50,90 C50,90 10,60 10,30 Z"
-            stroke="red" stroke-width="2" fill="none"
-            stroke-dasharray="300" stroke-dashoffset="300">
-        <animate attributeName="stroke-dashoffset" from="300" to="0" dur="2s" fill="freeze" />
-      </path>
-    </svg>
-    <div class="info">
-      <h1>Luis</h1>
-      <p>Diseño gráfico, soporte técnico y suscripciones digitales</p>
-    </div>
-    <a class="whatsapp" href="https://wa.me/?text=¡Mira mi tarjeta digital! ❤️👉 https://tutarjeta.com" target="_blank">
-      Compartir por WhatsApp
-    </a>
-  </div>
+  <canvas id="canvas" width="400" height="400"></canvas>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    ctx.translate(200, 200); // centro
+    ctx.scale(10, 10);       // agrandar figura
+
+    let t = 0;
+    function animar() {
+      if (t > Math.PI * 2) return; // detener al completar
+      const x = 16 * Math.pow(Math.sin(t), 3);
+      const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+
+      ctx.lineTo(x, y);
+      ctx.strokeStyle = "rgba(255,0,0,0.9)";
+      ctx.shadowBlur = 15;
+      ctx.shadowColor = "red";
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+
+      t += 0.02; // velocidad del trazo
+      requestAnimationFrame(animar);
+    }
+
+    ctx.beginPath();
+    animar();
+  </script>
 </body>
 </html>
+
+
