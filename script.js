@@ -15,33 +15,34 @@ function heartFunction(t) {
   return { x, y };
 }
 
-// Crear partículas
-for (let i = 0; i < 1000; i++) {
+// Crear partículas con objetivos en la forma del corazón
+for (let i = 0; i < 1200; i++) {
+  const angle = Math.random() * Math.PI * 2;
   particles.push({
     x: centerX,
     y: centerY,
     target: heartFunction(Math.random() * Math.PI * 2),
-    speed: 0.02 + Math.random() * 0.03
+    speed: 0.01 + Math.random() * 0.03
   });
 }
 
 function animate() {
   // Fondo semitransparente para efecto de estela
-  ctx.fillStyle = "rgba(0,0,0,0.1)";
+  ctx.fillStyle = "rgba(0,0,0,0.2)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   particles.forEach(p => {
     // mover cada partícula hacia su punto objetivo
-    p.x += (centerX + p.target.x * 15 - p.x) * p.speed;
-    p.y += (centerY + p.target.y * 15 - p.y) * p.speed;
+    p.x += (centerX + p.target.x * 20 - p.x) * p.speed;
+    p.y += (centerY + p.target.y * 20 - p.y) * p.speed;
 
     // dibujar línea desde el centro hasta la partícula
     ctx.beginPath();
     ctx.moveTo(centerX, centerY);
     ctx.lineTo(p.x, p.y);
-    ctx.strokeStyle = "rgba(255,0,0,0.5)";
-    ctx.lineWidth = 0.2;
-    ctx.shadowBlur = 8;
+    ctx.strokeStyle = "rgba(255,0,0,0.6)";
+    ctx.lineWidth = 0.3;
+    ctx.shadowBlur = 12;
     ctx.shadowColor = "red";
     ctx.stroke();
   });
@@ -50,6 +51,7 @@ function animate() {
 }
 
 animate();
+
 
 
 
